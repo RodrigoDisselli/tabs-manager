@@ -88,11 +88,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 .pages-list > li:hover, .pages-list > li.select {
-  background-color: #F5F5F5;
+  background-color: #EFEFEF;
 }
 
 .pages-list > li:active {
-  background-color: #EEE;
+  background-color: #E5E5E5;
 }
 
 .pages-list > li h3, .pages-list > li h4{

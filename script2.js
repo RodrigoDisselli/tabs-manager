@@ -2,10 +2,7 @@ var database = [{"pageTitle": "Google"},{"pageTitle": "Youtube"},{"pageTitle": "
 const pagesList = document.getElementById("pages-list-id");
 const searchInput = document.getElementById("search-input");
 
-
 database.map(object => createListItem(object.pageTitle));
-
-// database.filter(a => a.pageTitle === 'Google');
 
 function createListItem(pageTitle) {
     var li = document.createElement("LI");
@@ -13,27 +10,71 @@ function createListItem(pageTitle) {
         <div class='img' style='background-image: url(icon.png);'></div> 
         <div>
             <h3>${pageTitle}</h3>
-            <h4>www.google.com.br/vini-otariohasuhsahuhdhsaudhduadsadh</h4>
+            <h4>www.google.com.br/corrigi-hehehe</h4>
          </div>`;
     pagesList.appendChild(li);
 }
 
-searchInput.addEventListener("keypress", (event) => {
-    filterListItem(event.target.value);
-    console.log("digitado: " + event.target.value)
-});
+searchInput.oninput = (event) => filterListItem(event.target.value);
+
+function emptyMessage() {
+    var div = document.createElement("LI");
+    div.innerHTML = ``;
+    pagesList.appendChild(div);
+}
 
 function filterListItem(text){
-    let listItens = document.getElementsByTagName("li");
-    for(var i = 0; i < listItens.length; i ++){
-        pagesList.removeChild(listItens[i]);
+    pagesList.innerHTML = '';
+    let result = database.filter( data => data.pageTitle.toLowerCase().includes(text.toLowerCase()));
+    if (result.length == 0){
+
+    }else {
+        result.map(object => createListItem(object.pageTitle));
     }
-    
-    let result = database.filter( data => data.pageTitle.includes(text));
-    console.log("resultado:")
-    console.log(result);
-    result.map(object => createListItem(object.pageTitle));
 }
 
 
-// document.getElementById("pages-list-id").innerHTML = "<li> <div class='img' style='background-image: url(icon.png);'></div> <div><h3>Page Title</h3><h4>www.google.com.br/vini-otariohasuhsahuhdhsaudhduadsadh</h4></div></li>"
+
+
+
+document.addEventListener("keydown", function(event) {
+    
+    switch(event.code) {
+        case "ArrowDown":
+            event.preventDefault();
+            console.log('down')
+        break;
+        case "ArrowUp":
+            event.preventDefault();
+            console.log('up')
+        break;
+        case "NumpadEnter":
+            console.log('enter')
+            if(document.getElementsByTagName("LI").length === 1){
+                event.preventDefault();
+                console.log('go to page')
+            }
+        break;
+        case "Enter":
+            console.log('enter')
+            if(document.getElementsByTagName("LI").length === 1){
+                event.preventDefault();
+                console.log('go to page')
+            }
+        break;
+    }
+});
+
+function navigate(action){
+    if (action == 'up'){
+
+    }
+}
+
+function select(index){
+    document.getElementsByTagName("li")[index].className.add("select");
+}
+
+function removeSelect(index){
+    document.getElementsByTagName("li")[index].className.remove("select");
+}
